@@ -3,13 +3,9 @@
 //  Employee Directory Application
 
 // Q 4.C Session Data Integrity on Load
-function loadSession() {
-    // ORIGINAL
-    // const raw = sessionStorage.getItem("session");
-    // const session = JSON.parse(raw);          // No try/catch
-    // return session;                            // No field validation
 
-    // new
+// I fixed load session to use try/catch, have strings ahead of time, and to return nothing and not authenticate if something is missing or invalid.
+function loadSession() {
     const raw = sessionStorage.getItem("session");
     if (!raw) {
         return null;
@@ -55,10 +51,6 @@ function sanitizeSearchQuery(input) {
 }
 
 function performSearch(query) {
-    //ORIGINAL
-    // label.innerHTML = "Showing results for: " + sanitized;  // UNSAFE
-
-    // new
     const sanitized = sanitizeSearchQuery(query);
     const label = document.getElementById("search-label");
 
