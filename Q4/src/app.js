@@ -4,9 +4,29 @@
 
 
 function loadSession() {
+    // ORIGINAL
+    // const raw = sessionStorage.getItem("session");
+    // const session = JSON.parse(raw);          // No try/catch
+    // return session;                            // No field validation
+
+    //new
     const raw = sessionStorage.getItem("session");
-    const session = JSON.parse(raw);          // No try/catch
-    return session;                            // No field validation
+    if (!raw) {
+        return null;
+    }
+
+    try {
+        const session = JSON.parse(raw);
+
+        const hasValidFields =
+            typeof session?.userId === "string" && session.userId.trim() !== "" &&
+            typeof session?.role === "string" && session.role.trim() !== "" &&
+            typeof session?.displayName === "string" && session.displayName.trim() !== "";
+
+        return hasValidFields ? session : null;
+    } catch (error) {
+        return null;
+    }
 }
 
 
