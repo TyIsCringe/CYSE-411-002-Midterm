@@ -32,6 +32,8 @@ function loadSession() {
 
 //  Q4.A  Status Message Rendering
 
+// I fixed the status message rendering according to the requirements
+
 function renderStatusMessage(containerElement, message) {
     const paragraph = document.createElement("p");
     paragraph.textContent = String(message ?? "");
@@ -42,23 +44,9 @@ function renderStatusMessage(containerElement, message) {
 
 
 //  Q4.B  Search Query Sanitization
-//  Builds a display label from the user's search input.
-//  VULNERABILITY: The raw input is used directly with no
-//  character filtering, no length limit, and no trimming.
 
-
+// I fixed the search sanitaization to fit the requirements to prevent malicious commands from executing
 function sanitizeSearchQuery(input) {
-    // TODO: Implement sanitization.
-    // Requirements:
-    //   - Allow only letters, digits, spaces, hyphens, underscores
-    //   - Trim leading/trailing whitespace before processing
-    //   - Max 40 characters
-    //   - Return null if the result is empty after sanitization
-
-    //ORIGINAL
-    // return input;   // UNSAFE – returns raw input unchanged
-
-    // new
     const trimmed = String(input ?? "").trim();
     const filtered = trimmed.replace(/[^A-Za-z0-9 _-]/g, "");
     const limited = filtered.slice(0, 40);
