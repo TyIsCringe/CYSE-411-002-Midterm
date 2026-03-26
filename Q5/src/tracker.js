@@ -90,22 +90,9 @@ function saveDashboardState() {
 
 
 //  Q5.A  Fetch Incidents
-//  Retrieves open incidents from the REST API.
-//  VULNERABILITY 1: fetch() is called but NOT awaited.
-//    'res' holds a Promise, not a Response object.
-//  VULNERABILITY 2: response.ok is never checked, so
-//    HTTP 401 / 500 error bodies are processed as valid data.
-//  VULNERABILITY 3: No try/catch – a network failure will
-//    crash the function with an unhandled rejection.
 
-
+// I fixed fetch incidents with the try/catch and checked response.ok
 async function fetchIncidents() {
-    // ORIGINAL
-    // const res  = fetch("/api/incidents");      // Missing await
-    // const data = res.json();                   // Missing await; res is a Promise
-    // return data;
-
-    // new
     try {
         const response = await fetch("/api/incidents");
         if (!response.ok) {
@@ -115,7 +102,7 @@ async function fetchIncidents() {
         const data = await response.json();
         return data;
     } catch (error) {
-        console.error("Failed to fetch incidents:", error);
+        console.error("fetchIncidents failed ", error);
         return [];
     }
 }
