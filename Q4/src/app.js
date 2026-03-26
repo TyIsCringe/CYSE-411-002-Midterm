@@ -2,7 +2,7 @@
 //  CYSE 411 Q4 Starter Code
 //  Employee Directory Application
 
-
+// Q 4.C Session Data Integrity on Load
 function loadSession() {
     // ORIGINAL
     // const raw = sessionStorage.getItem("session");
@@ -31,17 +31,8 @@ function loadSession() {
 
 
 //  Q4.A  Status Message Rendering
-//  Displays an employee's status message on their profile card.
-//  VULNERABILITY: The message is inserted via innerHTML,
-//  allowing any HTML or script tags in the message to
-//  execute in the viewer's browser (stored XSS).
-
 
 function renderStatusMessage(containerElement, message) {
-    // ORIGINAL
-    // containerElement.innerHTML = "<p>" + message + "</p>";   // UNSAFE
-
-    // new
     const paragraph = document.createElement("p");
     paragraph.textContent = String(message ?? "");
     containerElement.textContent = "";
