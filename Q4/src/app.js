@@ -20,6 +20,8 @@ function loadSession() {
 function renderStatusMessage(containerElement, message) {
     // ORIGINAL
     // containerElement.innerHTML = "<p>" + message + "</p>";   // UNSAFE
+
+    // new
     const paragraph = document.createElement("p");
     paragraph.textContent = String(message ?? "");
     containerElement.textContent = "";
@@ -45,6 +47,7 @@ function sanitizeSearchQuery(input) {
     //ORIGINAL
     // return input;   // UNSAFE – returns raw input unchanged
 
+    // new
     const trimmed = String(input ?? "").trim();
     const filtered = trimmed.replace(/[^A-Za-z0-9 _-]/g, "");
     const limited = filtered.slice(0, 40);
@@ -53,6 +56,10 @@ function sanitizeSearchQuery(input) {
 }
 
 function performSearch(query) {
+    //ORIGINAL
+    // label.innerHTML = "Showing results for: " + sanitized;  // UNSAFE
+
+    // new
     const sanitized = sanitizeSearchQuery(query);
     const label = document.getElementById("search-label");
 
