@@ -14,12 +14,8 @@ let currentFilter = "all";
 
 
 //  Q5.C  Dashboard State – Load
-//  Reads the last selected filter from localStorage.
-//  VULNERABILITY: JSON.parse is called without a try/catch.
-//  The stored filter value is used without checking whether
-//  it belongs to the accepted list.
 
-
+// I  added a try/catch, read the last item, and made sure it's in the list first
 function loadDashboardState() {
     // ORIGINAL
     // const raw   = localStorage.getItem("dashboardState");
@@ -58,12 +54,8 @@ function loadDashboardState() {
 
 
 //  Q5.C  Dashboard State – Save
-//  Writes the selected filter back to localStorage after a fetch.
-//  VULNERABILITY: The raw value from the DOM input is written
-//  directly to localStorage without validating it against the
-//  accepted list.
 
-
+// I validated the raw value and made sure it writes the filter back to localStorage after fetch
 function saveDashboardState() {
     // ORIGINAL
     // const filterInput = document.getElementById("filter-select");
@@ -110,30 +102,9 @@ async function fetchIncidents() {
 
 
 //  Q5.B  Render Incidents
-//  Builds the incident list in the dashboard.
-//  VULNERABILITY 1: Incident data (title, severity) is inserted
-//    via innerHTML – a stored XSS risk if the API returns
-//    attacker-controlled content.
-//  VULNERABILITY 2: No validation of the incidents array or
-//    individual incident fields before rendering.
 
-
+// I made render incidents make an incident list, I fixed the XSS risk, and I checked teh data to ensure they are arrays
 function renderIncidents(incidents) {
-    // ORIGINAL
-    // const container = document.getElementById("incident-list");
-    // container.innerHTML = "";                  // Clear previous results
-    //
-    // incidents.forEach(function (incident) {
-    //    const item = document.createElement("li");
-    //    // UNSAFE – directly inserts API response as HTML
-    //    item.innerHTML =
-    //        "<strong>" + incident.title + "</strong>" +
-    //        " <span class='severity severity-" + incident.severity + "'>" +
-    //        incident.severity + "</span>";
-    //    container.appendChild(item);
-    // });
-
-    // new
     const container = document.getElementById("incident-list");
     container.textContent = "";
 

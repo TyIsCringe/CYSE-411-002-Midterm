@@ -29,7 +29,6 @@ function loadSession() {
 //  Q4.A  Status Message Rendering
 
 // I fixed the status message rendering according to the requirements
-
 function renderStatusMessage(containerElement, message) {
     const paragraph = document.createElement("p");
     paragraph.textContent = String(message ?? "");
