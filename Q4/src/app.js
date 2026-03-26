@@ -9,7 +9,7 @@ function loadSession() {
     // const session = JSON.parse(raw);          // No try/catch
     // return session;                            // No field validation
 
-    //new
+    // new
     const raw = sessionStorage.getItem("session");
     if (!raw) {
         return null;
