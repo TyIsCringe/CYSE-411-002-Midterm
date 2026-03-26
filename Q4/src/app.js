@@ -8,7 +8,7 @@ function loadSession() {
     const session = JSON.parse(raw);          // No try/catch
     return session;                            // No field validation
 }
-
+//edit
 
 //  Q4.A  Status Message Rendering
 //  Displays an employee's status message on their profile card.
