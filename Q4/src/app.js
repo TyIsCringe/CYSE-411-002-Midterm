@@ -18,7 +18,10 @@ function loadSession() {
 
 
 function renderStatusMessage(containerElement, message) {
-    containerElement.innerHTML = "<p>" + message + "</p>";   // UNSAFE
+    const paragraph = document.createElement("p");
+    paragraph.textContent = String(message ?? "");
+    containerElement.textContent = "";
+    containerElement.appendChild(paragraph);
 }
 
 
@@ -30,19 +33,23 @@ function renderStatusMessage(containerElement, message) {
 
 
 function sanitizeSearchQuery(input) {
-    // TODO: Implement sanitization.
-    // Requirements:
-    //   - Allow only letters, digits, spaces, hyphens, underscores
-    //   - Trim leading/trailing whitespace before processing
-    //   - Max 40 characters
-    //   - Return null if the result is empty after sanitization
-    return input;   // UNSAFE – returns raw input unchanged
+    const trimmed = String(input ?? "").trim();
+    const filtered = trimmed.replace(/[^A-Za-z0-9 _-]/g, "");
+    const limited = filtered.slice(0, 40);
+
+    return limited.length > 0 ? limited : null;
 }
 
 function performSearch(query) {
     const sanitized = sanitizeSearchQuery(query);
     const label = document.getElementById("search-label");
-    label.innerHTML = "Showing results for: " + sanitized;  // UNSAFE
+
+    if (sanitized === null) {
+        label.textContent = "Please enter a valid search query.";
+        return;
+    }
+
+    label.textContent = "Showing results for: " + sanitized;
 }
 
 
